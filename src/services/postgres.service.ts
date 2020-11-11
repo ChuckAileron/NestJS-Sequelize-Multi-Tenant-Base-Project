@@ -40,12 +40,29 @@ export class PostgresService {
     }
     
     //Crear un atributo (en db1)
-    async db1create(attributes: attributes) {
+    async db1create(attributes: attributes): Promise<attributes> {
         return await this.attributesModel1.create(attributes);
     }
     //Crear un atributo (en db2)
-    async db2create(attributes: attributes) {
+    async db2create(attributes: attributes): Promise<attributes> {
         return await this.attributesModel2.create(attributes);
+    }
+
+    //Actualizar un atributo (en db1)
+    async db1update(body: attributes, attribute_id: string): Promise<void> {
+        await this.attributesModel1.update(body, {
+            where: {
+                attribute_id,
+            },
+        })
+    }
+    //Actualizar un atributo (en db2)
+    async db2update(body: attributes, attribute_id: string): Promise<void> {
+        await this.attributesModel2.update(body, {
+            where: {
+                attribute_id,
+            },
+        })
     }
 
     //Eliminar un atributo (en db1)
